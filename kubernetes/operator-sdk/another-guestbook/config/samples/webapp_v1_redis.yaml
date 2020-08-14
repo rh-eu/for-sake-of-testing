@@ -1,0 +1,6 @@
+apiVersion: webapp.mifomm.eu/v1
+kind: Redis
+metadata:
+  name: redis-sample
+spec:
+  followerReplicas: 2

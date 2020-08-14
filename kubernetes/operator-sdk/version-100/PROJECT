@@ -1,0 +1,14 @@
+domain: mifomm.eu
+layout: go.kubebuilder.io/v2
+projectName: version-100
+repo: github.com/rh/tutorial/Operator-SDK/version-100
+resources:
+- group: webapp
+  kind: GuestBook
+  version: v1
+- group: webapp
+  kind: Redis
+  version: v1
+version: 3-alpha
+plugins:
+  go.sdk.operatorframework.io/v2-alpha: {}

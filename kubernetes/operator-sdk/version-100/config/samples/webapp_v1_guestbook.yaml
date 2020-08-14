@@ -1,0 +1,11 @@
+apiVersion: webapp.mifomm.eu/v1
+kind: GuestBook
+metadata:
+  name: guestbook-sample
+spec:
+  redisName: redis-sample
+  frontend:
+    servingPort: 7077
+    resources:
+      requests:
+        cpu: 80m
