@@ -27,8 +27,8 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	webappv1 "github.com/rh/tutorial/Operator-SDK/another-guestbook/api/v1"
-	"github.com/rh/tutorial/Operator-SDK/another-guestbook/controllers"
+	webappv1 "github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/another-guestbook/api/v1"
+	"github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/another-guestbook/controllers"
 	// +kubebuilder:scaffold:imports
 )
 

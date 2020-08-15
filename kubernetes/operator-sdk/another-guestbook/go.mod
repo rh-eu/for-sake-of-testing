@@ -1,4 +1,4 @@
-module github.com/rh/tutorial/Operator-SDK/another-guestbook
+module github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/another-guestbook
 
 go 1.13
 

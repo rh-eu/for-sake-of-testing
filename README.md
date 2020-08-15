@@ -1,2 +1,2 @@
-# for-sake.of-testing
+# for-sake-of-testing
 Just a test repo ...

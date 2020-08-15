@@ -1,6 +1,6 @@
 domain: mifomm.eu
 layout: go.kubebuilder.io/v2
-repo: github.com/rh/tutorial/Operator-SDK/another-guestbook
+repo: github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/another-guestbook
 resources:
 - group: webapp
   kind: GuestBook

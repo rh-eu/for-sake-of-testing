@@ -1,4 +1,4 @@
-module github.com/rh/tutorial/Operator-SDK/version-100
+module github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/version-100
 
 go 1.13
 

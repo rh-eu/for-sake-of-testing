@@ -24,7 +24,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	webappv1 "github.com/rh/tutorial/Operator-SDK/basis-inst/api/v1"
+	webappv1 "github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/basis-inst/api/v1"
 )
 
 // RedisReconciler reconciles a Redis object
@@ -37,6 +37,7 @@ type RedisReconciler struct {
 // +kubebuilder:rbac:groups=webapp.mifomm.eu,resources=redis,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=webapp.mifomm.eu,resources=redis/status,verbs=get;update;patch
 
+// Reconcile ...
 func (r *RedisReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 	_ = context.Background()
 	_ = r.Log.WithValues("redis", req.NamespacedName)
@@ -46,6 +47,7 @@ func (r *RedisReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 	return ctrl.Result{}, nil
 }
 
+// SetupWithManager ...
 func (r *RedisReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&webappv1.Redis{}).

@@ -28,7 +28,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 	"sigs.k8s.io/controller-runtime/pkg/source"
 
-	webappv1 "github.com/rh/tutorial/Operator-SDK/version-100/api/v1"
+	webappv1 "github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/version-100/api/v1"
 )
 
 // GuestBookReconciler reconciles a GuestBook object

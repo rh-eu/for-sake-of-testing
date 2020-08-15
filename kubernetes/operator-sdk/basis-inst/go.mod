@@ -1,4 +1,4 @@
-module github.com/rh/tutorial/Operator-SDK/basis-inst
+module github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/basis-inst
 
 go 1.13
 

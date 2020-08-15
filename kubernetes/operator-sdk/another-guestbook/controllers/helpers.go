@@ -27,7 +27,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 
-	webappv1 "github.com/rh/tutorial/Operator-SDK/another-guestbook/api/v1"
+	webappv1 "github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/another-guestbook/api/v1"
 )
 
 func (r *GuestBookReconciler) desiredDeployment(book webappv1.GuestBook, redis webappv1.Redis) (appsv1.Deployment, error) {

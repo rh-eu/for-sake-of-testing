@@ -26,7 +26,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	webappv1 "github.com/rh/tutorial/Operator-SDK/version-100/api/v1"
+	webappv1 "github.com/rh/for-sake-of-testing/kubernetes/operator-sdk/version-100/api/v1"
 )
 
 // RedisReconciler reconciles a Redis object
