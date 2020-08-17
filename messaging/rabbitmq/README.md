@@ -2,7 +2,7 @@
 
 ## nodes: rabbit-1@rabbit-1, rabbit-2@rabbit-2, rabbit-3@rabbit-3
 
-## provide the Erlang-Cookie - it *must* be same for each rabbit-node in order to build a cluster
+## provide the Erlang-Cookie - it **must** be same for each rabbit-node in order to build a cluster
 
 ## management-version with UI enabled, expose port 15672
 
