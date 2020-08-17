@@ -19,17 +19,25 @@ docker exec -it rabbit-1 rabbitmqctl cluster_status
 ## join rabbit-2
 
 docker exec -it rabbit-2 rabbitmqctl stop_app
+
 docker exec -it rabbit-2 rabbitmqctl reset
+
 docker exec -it rabbit-2 rabbitmqctl join_cluster rabbit@rabbit-1
+
 docker exec -it rabbit-2 rabbitmqctl start_app
+
 docker exec -it rabbit-2 rabbitmqctl cluster_status
 
 ## join rabbit-3
 
 docker exec -it rabbit-3 rabbitmqctl stop_app
+
 docker exec -it rabbit-3 rabbitmqctl reset
+
 docker exec -it rabbit-3 rabbitmqctl join_cluster rabbit@rabbit-1
+
 docker exec -it rabbit-3 rabbitmqctl start_app
+
 docker exec -it rabbit-3 rabbitmqctl cluster_status
 
 ## publishing a message
@@ -39,6 +47,7 @@ docker exec -it rabbit-3 rabbitmqctl cluster_status
 cd messaging/rabbitmq/golang-apps/publischer
 
 docker build . -t mifomm/rabbitmq-publisher:1.0.0
+
 docker push mifomm/rabbitmq-publisher:1.0.0
 
 docker run -it --rm --net rabbits -e RABBIT_HOST=rabbit-1 -e RABBIT_PORT=5672 -e RABBIT_USERNAME=guest -e RABBIT_PASSWORD=guest -p 8000:80 mifomm/rabbitmq-publisher:1.0.0
@@ -52,6 +61,7 @@ curl -X POST http://localhost:8000/publish/the-new-message
 cd messaging/rabbitmq/golang-apps/consumer
 
 docker build . -t mifomm/rabbitmq-consumer:1.0.0
+
 docker push mifomm/rabbitmq-consumer:1.0.0
 
 docker run -it --rm --net rabbits -e RABBIT_HOST=rabbit-1 -e RABBIT_PORT=5672 -e RABBIT_USERNAME=guest -e RABBIT_PASSWORD=guest mifomm/rabbitmq-consumer:1.0.0
