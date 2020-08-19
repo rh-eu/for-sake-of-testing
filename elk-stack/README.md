@@ -1,1 +1,1 @@
-# ELK-Stack: Elastic-Search Logstash, Kibana and the Beats
+# ELK-Stack: Elastic-Search, Logstash, Kibana and the Beats
