@@ -42,7 +42,19 @@ spec:
           readOnly: false          
         - mountPath: /grafana-dashboard-definitions/0/nodeexporter
           name: grafana-dashboard-nodeexporter
-          readOnly: false            
+          readOnly: false
+      initContainers:
+        - name: dashboard
+          image: busybox
+          command:
+            - wget
+            - "-O"
+            - "/grafana-dashboard-nodeexporter/node-exporter-full.json"
+            - https://raw.githubusercontent.com/rh-eu/for-sake-of-testing/master/kubernetes/monitoring/grafana/node-exporter-full.json
+          volumeMounts:
+          - name: grafana-dashboard-nodeexporter
+            mountPath: "/grafana-dashboard-nodeexporter"
+            readOnly: false               
       volumes:
       - configMap:
           name: grafana-datasources
@@ -50,6 +62,8 @@ spec:
       - configMap:
           name: grafana-dashboards
         name: grafana-dashboards      
-      - configMap:
-          name: grafana-dashboard-nodeexporter
-        name: grafana-dashboard-nodeexporter          
+      #- configMap:
+      #    name: grafana-dashboard-nodeexporter
+      #  name: grafana-dashboard-nodeexporter
+      - name: grafana-dashboard-nodeexporter
+        emptyDir: {}          
