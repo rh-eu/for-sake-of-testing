@@ -1,4 +1,4 @@
 bases:
-  - ../../prometheus-operator
+  - ../base
 patchesStrategicMerge:
   - updates.yaml
