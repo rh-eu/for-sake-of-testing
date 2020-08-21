@@ -1,0 +1,30 @@
+FROM ubuntu
+
+RUN apt-get update
+RUN apt-get install sudo -y
+
+RUN apt-get update
+RUN apt-get install software-properties-common -y
+
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 8CF63AD3F06FC659
+RUN add-apt-repository ppa:jonathonf/vim -y
+
+RUN apt-get update
+RUN apt-get install vim -y
+
+RUN apt-get install curl -y
+
+RUN mkdir /go
+RUN useradd -u 1000 --home /go go
+RUN chown -R go:go /go
+
+RUN usermod -aG sudo go
+
+RUN echo "%sudo  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Change to non-root privilege
+USER go
+
+WORKDIR /go
+
+ENTRYPOINT [ "/bin/bash" ]

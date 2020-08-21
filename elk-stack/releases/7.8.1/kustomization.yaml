@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - clusterrole.yaml
+  - clusterrolebinding.yaml
+  - configmap.filebeat.yaml
+  - configmap.logstash.yaml
+  - daemonset.yaml
+  - deploy.kibana.yaml
+  - deploy.logstash.yaml
+  - filebeat.serviceaccount.yaml
+  - filebeat.serviceaccount.yaml
+  - statefulset.yaml
