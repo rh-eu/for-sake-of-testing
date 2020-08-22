@@ -14,17 +14,19 @@ RUN apt-get install vim -y
 
 RUN apt-get install curl -y
 
-RUN mkdir /go
-RUN useradd -u 1000 --home /go go
-RUN chown -R go:go /go
+RUN useradd -u 1000 -m rh
 
-RUN usermod -aG sudo go
+RUN usermod -aG sudo rh
 
 RUN echo "%sudo  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-# Change to non-root privilege
-USER go
+COPY .vimrc /home/rh/
+COPY .vim /home/rh/.vim/
+RUN chown rh:rh /home/rh/.vimrc
+RUN chown -R rh:rh /home/rh/.vim/
 
-WORKDIR /go
+USER rh
+
+WORKDIR /home/rh
 
 ENTRYPOINT [ "/bin/bash" ]
