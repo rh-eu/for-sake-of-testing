@@ -28,7 +28,8 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " Vim-go and friends
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'fatih/molokai'
+" Plug 'fatih/molokai'
+Plug 'tomasr/molokai'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Python ...
