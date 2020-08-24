@@ -7,19 +7,15 @@ RUN apt-get update
 RUN apt-get install sudo -y
 RUN apt-get install git -y
 RUN apt-get install software-properties-common -y
-
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 8CF63AD3F06FC659
 RUN add-apt-repository ppa:jonathonf/vim -y
-
 RUN apt-get update
 RUN apt-get install vim -y
-
+RUN apt-get install gcc -y
 RUN apt-get install curl -y
 
 RUN useradd -u 1000 -m rh
-
 RUN usermod -aG sudo rh
-
 RUN echo "%sudo  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 COPY .vimrc /home/rh/

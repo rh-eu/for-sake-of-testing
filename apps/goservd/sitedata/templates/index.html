@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>GoServ Demo</title>
+
+</head>
+<body>
+   <h1>Testing ...</h1>
+
+   <header>
+    <h1><a href='/'>Snippetbox</a></h1>
+   </header>
+   <nav>
+    <a href="/">Home</a>
+   </nav>
+   <main>
+    <h2>Latest Snippets</h2>
+    <p>There's nothing to see here yet!</p>
+
+    <h1>{{.PageTitle}}</h1>
+       <ul>
+          {{range .Todos}}
+            {{if .Done}}
+              <li class="done">{{.Title}}</li>
+            {{else}}
+              <li>{{.Title}}</li>
+            {{end}}
+          {{end}}
+      </ul>
+  </main>
+
+</body>
+</html>

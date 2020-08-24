@@ -75,6 +75,8 @@ call plug#end()
 :set shiftwidth=2
 :set autoindent
 :set smartindent
+:set encoding=utf-8
+:set fileencoding=utf-8
 
 " Bind nohl
 " Removes highlight of your last search
@@ -147,6 +149,9 @@ colorscheme molokai
 " Begin NERDTree
 autocmd vimenter * NERDTree
 map <Leader>t :NERDTreeToggle<CR>
+
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '~'
 
 " End NERDTree
 

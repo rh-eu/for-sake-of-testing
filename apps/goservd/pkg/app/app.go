@@ -6,17 +6,30 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/rh/for-sake-of-testing/apps/goservd/pkg/htmlutils"
 )
 
 // App ...
 type App struct {
-	r *httprouter.Router
+	r  *httprouter.Router
+	tg *htmlutils.TemplateGroup
+}
+
+type pageContext struct {
+}
+
+func (k *App) getPageContext(r *http.Request, urlBase string) *pageContext {
+	c := &pageContext{}
+
+	return c
 }
 
 func (k *App) getRoothandler() httprouter.Handle {
 	return httprouter.Handle(func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		fmt.Printf("Hello World!\n")
-
+		// w.Write([]byte("Hello World!"))
+		urlBase := "/"
+		k.tg.Render(w, "index.html", k.getPageContext(r, urlBase))
 	})
 }
 
