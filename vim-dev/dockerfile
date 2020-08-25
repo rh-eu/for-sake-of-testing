@@ -27,6 +27,9 @@ RUN mkdir /home/rh/go
 COPY go/bin /home/rh/go/bin
 COPY go/pkg /home/rh/go/pkg
 RUN chown -R rh:rh /home/rh/go/
+COPY nvm.sh /home/rh/
+RUN chmod 755 /home/rh/nvm.sh
+RUN chown rh:rh /home/rh/nvm.sh
 
 USER rh
 
@@ -45,5 +48,8 @@ RUN curl -LO https://golang.org/dl/go1.14.7.linux-amd64.tar.gz
 RUN echo "4a7fa60f323ee1416a4b1425aefc37ea359e9d64df19c326a58953a97ad41ea5 go1.14.7.linux-amd64.tar.gz" | sha256sum -c || exit 1
 
 RUN sudo tar -C /usr/local -xvzf go1.14.7.linux-amd64.tar.gz && rm go1.14.7.linux-amd64.tar.gz
+
+# install nodejs v14.8.0
+RUN ./nvm.sh
 
 ENTRYPOINT [ "/bin/bash" ]
