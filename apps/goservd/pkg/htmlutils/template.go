@@ -103,7 +103,7 @@ func (g *TemplateGroup) Render(w http.ResponseWriter, name string, context inter
 	// response to the user.
 	// t, err := template.ParseFiles("./sitedata/templates/index.html")
 
-	ts := template.New("index.html")
+	ts := template.New("index.html").Funcs(FuncMap())
 
 	ts, err = vfstemplate.ParseFiles(sitedata.Assets, ts, "templates/index.html")
 	if err != nil {
