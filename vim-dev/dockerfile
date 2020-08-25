@@ -1,0 +1,61 @@
+FROM ubuntu
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Berlin
+
+ARG gituser
+ARG gitemail 
+
+RUN apt-get update
+RUN apt-get install sudo -y
+RUN apt-get install git -y
+RUN apt-get install software-properties-common -y
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 8CF63AD3F06FC659
+RUN add-apt-repository ppa:jonathonf/vim -y
+RUN apt-get update
+RUN apt-get install vim -y
+RUN apt-get install gcc -y
+RUN apt-get install curl -y
+
+RUN useradd -u 1000 -m rh
+RUN usermod -aG sudo rh
+RUN echo "%sudo  ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+COPY .vimrc /home/rh/
+COPY .vim /home/rh/.vim/
+RUN chown rh:rh /home/rh/.vimrc
+RUN chown -R rh:rh /home/rh/.vim/
+
+RUN mkdir /home/rh/go
+COPY go/bin /home/rh/go/bin
+COPY go/pkg /home/rh/go/pkg
+RUN chown -R rh:rh /home/rh/go/
+COPY nvm.sh /home/rh/
+RUN chmod 755 /home/rh/nvm.sh
+RUN chown rh:rh /home/rh/nvm.sh
+
+USER rh
+
+RUN echo "export GOROOT=/usr/local/go" >> /home/rh/.profile
+RUN echo "export GOPATH=/home/rh/go" >> /home/rh/.profile
+RUN echo "export PATH=\$PATH:\$GOPATH/bin:\$GOROOT/bin" >> /home/rh/.profile
+RUN echo "export TERM=screen-256color" >> /home/rh/.profile
+
+WORKDIR /home/rh
+
+RUN git config --global user.name "$gituser"
+RUN git config --global user.email "$gitemail"
+
+#RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+RUN curl -LO https://golang.org/dl/go1.14.7.linux-amd64.tar.gz
+
+RUN echo "4a7fa60f323ee1416a4b1425aefc37ea359e9d64df19c326a58953a97ad41ea5 go1.14.7.linux-amd64.tar.gz" | sha256sum -c || exit 1
+
+RUN sudo tar -C /usr/local -xvzf go1.14.7.linux-amd64.tar.gz && rm go1.14.7.linux-amd64.tar.gz
+
+# install nodejs v14.8.0
+RUN ./nvm.sh
+
+ENTRYPOINT [ "/bin/bash" ]
