@@ -1,0 +1,57 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$script = <<-SCRIPT
+
+apt-get update
+apt-get dist-upgrade -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+add-apt-repository ppa:deadsnakes/ppa
+add-apt-repository ppa:jonathonf/vim
+
+apt-get update
+apt-get upgrade -y
+
+apt-get install docker-ce -y
+usermod -aG docker vagrant
+
+apt-get install python3.7 -y
+apt-get install python3-pip -y
+
+apt-get install python3-tk -y
+
+apt-get install vim-gtk3 -y
+
+apt-get install build-essential -y
+apt-get install manpages-dev -y
+
+apt-get install xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11 -y
+
+sed -i 's/allowed_users=.*$/allowed_users=anybody/' /etc/X11/Xwrapper.config
+sed -i 's/us/de/g' /etc/default/keyboard
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.disksize.size = "150GB"
+  config.vm.hostname = "devvscode.vagrant.af"
+  config.vm.network "private_network", ip: "192.168.1.19"
+  config.vm.provider "virtualbox" do |v|
+    v.gui = true	  
+    v.default_nic_type = "virtio"
+    v.customize ["modifyvm", :id, "--usb", "on"]
+    v.customize ["modifyvm", :id, "--vram", "12"]
+    v.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+    v.name = "devvscode"
+    v.memory = 16384
+    v.cpus = 4
+  end	
+  config.vm.provision "shell", inline: $script
+end
