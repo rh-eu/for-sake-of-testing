@@ -105,7 +105,7 @@ func (g *TemplateGroup) Render(w http.ResponseWriter, name string, context inter
 
 	ts := template.New("index.html").Funcs(FuncMap())
 
-	ts, err = vfstemplate.ParseFiles(sitedata.Assets, ts, "templates/index.html")
+	ts, err = vfstemplate.ParseFiles(sitedata.Assets, ts, "index.html")
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Internal Server Error", 500)

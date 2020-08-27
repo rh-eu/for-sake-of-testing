@@ -1,3 +1,5 @@
+const webpack = require('webpack'); 
+
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const path = require('path');
@@ -30,13 +32,14 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({
-      template: "../sitedata/templates/index.html",
-      filename: "./index.html"
+      template: "../sitedata/index.html",
+      filename: "index.html"
     })
   ],
   devServer: {
-    //contentBase: "../sitedata/templates",
+    contentBase: "../sitedata",
     inline: true,
     hot: true,
     host: "0.0.0.0",
