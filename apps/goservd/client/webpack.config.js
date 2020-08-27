@@ -1,5 +1,9 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
+const path = require('path');
+
+const BUILD_DIR = path.resolve(__dirname, '../sitedata/built');
+
 module.exports = {
   module: {
     rules: [
@@ -20,10 +24,25 @@ module.exports = {
       }
     ]
   },
+  output: {
+    path: BUILD_DIR,
+    publicPath: '/built/',
+    filename: 'bundle.js'
+  },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
+      template: "../sitedata/templates/index.html",
       filename: "./index.html"
     })
-  ]
+  ],
+  devServer: {
+    //contentBase: "../sitedata/templates",
+    inline: true,
+    hot: true,
+    host: "0.0.0.0",
+    port: 5052,
+    proxy: {
+      "**": "http://localhost:5051"
+    }
+  }
 };

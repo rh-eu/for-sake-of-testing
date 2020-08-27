@@ -50,5 +50,8 @@ func NewApp() *App {
 	rootHandler := k.getRoothandler()
 	router.GET("/hello", rootHandler)
 
+	router.Handler("GET", "/static/*filepath", http.StripPrefix("/static/", http.FileServer(http.Dir("./sitedata/static/"))))
+	router.Handler("GET", "/built/*filepath", http.StripPrefix("/built/", http.FileServer(http.Dir("./sitedata/built/"))))
+
 	return k
 }
