@@ -2,13 +2,13 @@ package app
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
-        "io/ioutil" 
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/rh/for-sake-of-testing/apps/goservd/pkg/htmlutils"
-        "github.com/rh/for-sake-of-testing/apps/goservd/pkg/sitedata"
+	"github.com/rh/for-sake-of-testing/apps/goservd/pkg/sitedata"
 )
 
 // App ...
@@ -42,20 +42,20 @@ func (k *App) Run() {
 }
 
 func faviconHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-     //http.ServeFile(w, r, "/static/images/favicon.ico")
+	//http.ServeFile(w, r, "/static/images/favicon.ico")
 
-     file, err := sitedata.Assets.Open("images/favicon.ico")
-     if err != nil {
-             log.Fatal(err)
-     }
+	file, err := sitedata.Assets.Open("images/favicon.ico")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-     content, err := ioutil.ReadAll(file)
-     if err != nil {
-             log.Fatal(err)
-     }
-     w.Write([]byte(string(content)))
-     defer file.Close()
+	content, err := ioutil.ReadAll(file)
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	w.Write([]byte(string(content)))
+	defer file.Close()
 }
 
 // NewApp ...
@@ -66,7 +66,7 @@ func NewApp() *App {
 
 	router := k.r
 
-        router.GET("/favicon.ico", faviconHandler)
+	router.GET("/favicon.ico", faviconHandler)
 
 	rootHandler := k.getRoothandler()
 	router.GET("/", rootHandler)

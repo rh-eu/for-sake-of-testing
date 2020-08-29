@@ -1,0 +1,7 @@
+FROM ARG_FROM
+
+ADD bin/ARG_VERSION/ARG_ARCH/goservd /goservd
+
+USER nobody:nobody
+
+CMD [ "/goservd" ]

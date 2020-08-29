@@ -1,0 +1,15 @@
+FROM golang:1.14-alpine
+
+WORKDIR /data
+ENV HOME /data
+ENV GOPATH /data/go
+
+ENV npm_config_cache=/data/npm_cache
+
+ARG ARCH
+ENV ARCH ${ARCH}
+RUN ln -s -f "/data/std/${ARCH}" "/usr/local/go/pkg/linux_${ARCH}_static"
+
+RUN apk update && apk upgrade && apk add --no-cache git nodejs bash npm
+
+RUN GOPATH=/tmp GOBIN=/usr/local/bin go get github.com/tools/godep
