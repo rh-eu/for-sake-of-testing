@@ -4,6 +4,7 @@ metadata:
   labels:
     app: goservd
   name: goservd
+  namespace: default
 spec:
   replicas: 4
   selector:
@@ -17,4 +18,46 @@ spec:
       containers:
       - image: mifomm/goservd-amd64:0.0.7
         name: goservd
-        resources: {}
+        resources:
+          requests:
+            cpu: 25m
+            memory: 263M
+          limits:
+            cpu: 25m
+            memory: 263M
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goservd
+  namespace: default
+spec:
+  selector:
+    app: goservd
+  ports:
+  - name: web
+    port: 5051
+    protocol: TCP
+    targetPort: 5051
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: goservd-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/frontend-entry-points: http,https
+    #traefik.ingress.kubernetes.io/redirect-entry-point: https
+    #traefik.ingress.kubernetes.io/redirect-permanent: "true"
+    #traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    #traefik.ingress.kubernetes.io/rewrite-target: "/"
+spec:
+  rules:
+  - host: goservd.fabulous.af
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: goservd
+          servicePort: 5051   
