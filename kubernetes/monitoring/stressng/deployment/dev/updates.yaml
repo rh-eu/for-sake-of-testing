@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: stressng
+  name: stressng
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: stressng
+  template:
+    metadata:
+      labels:
+        app: stressng
+    spec:
+      containers:
+      - image: mifomm/stressng
+        name: stressng
+        resources:
+          requests:
+            cpu: 25m
+            memory: 263M
+          limits:
+            cpu: 25m
+            memory: 263M

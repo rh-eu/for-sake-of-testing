@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: goservd
+  name: goservd
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: goservd
+  template:
+    metadata:
+      labels:
+        app: goservd
+    spec:
+      containers:
+      - image: mifomm/goservd-amd64:0.0.7
+        name: goservd
+        resources: {}

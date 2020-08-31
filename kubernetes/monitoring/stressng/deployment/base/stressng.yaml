@@ -17,4 +17,10 @@ spec:
       containers:
       - image: mifomm/stressng
         name: stressng
-        resources: {}
+        resources:
+          requests:
+            cpu: 25m
+            memory: 263M
+          limits:
+            cpu: 25m
+            memory: 263M
